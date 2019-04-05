@@ -42,9 +42,8 @@ class App extends Component {
    applyVideoToCurrentMovie(){
         const request = axios.get(`${API_END_POINT}movie/${this.state.currentMovie.id}?api_key=${API_KEY}&append_to_response=videos&include_adult=false`).then(function(response){
             if(response.data.videos.results[0] && response.data.videos.results[0].key){ 
-                 const youtube_key =response.data.videos.results[0].key;
-                 let currentMovieWithVideo = this.state.currentMovie;
-                 currentMovieWithVideo.videoId = youtube_key;
+                 const youtube_key = response.data.videos.results[0].key;
+                 let currentMovieWithVideo = {...this.state.currentMovie, videoId:youtube_key};
                  this.setState({currentMovie:currentMovieWithVideo});
             }
         }.bind(this));
